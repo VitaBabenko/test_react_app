@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunktest_react_app=self.webpackChunktest_react_app||[]).push([[507],{507:function(e,t,n){n.r(t),n.d(t,{default:function(){return c}});var r=n(184),u=function(){return(0,r.jsx)("h1",{children:"Welcome home page"})},c=function(){return(0,r.jsx)(u,{})}}}]);
+//# sourceMappingURL=507.04314270.chunk.js.map
