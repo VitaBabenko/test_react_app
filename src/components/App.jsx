@@ -1,8 +1,10 @@
+import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import { Layout } from './Layout';
-import Home from '../pages/Home';
-import Tweets from '../pages/Tweets';
+
+const HomePage = lazy(() => import('../pages/HomePage'));
+const TweetsPage = lazy(() => import('../pages/TweetsPage'));
 
 export const App = () => {
   return (
@@ -10,8 +12,8 @@ export const App = () => {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="" element={<Tweets />} />
+          <Route index element={<HomePage />} />
+          <Route path="tweets" element={<TweetsPage />} />
         </Route>
       </Routes>
     </>
