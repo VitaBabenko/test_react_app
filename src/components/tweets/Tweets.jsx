@@ -22,7 +22,7 @@ export const Tweets = () => {
   const [users, setUsers] = useState(getInitialUsers);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [changeFollower, setNewFollowers] = useState();
+  const [changeFollower, setNewFollowers] = useState(100500);
   const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
