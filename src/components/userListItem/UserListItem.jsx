@@ -1,8 +1,8 @@
-// import { useState } from 'react';
+import { useState } from 'react';
+import { GetTweetById } from '../../services/GetTweetById';
 import Logo from '../../images/Logo.png';
 import picture from '../../images/picture.png';
-// import { AddFollowerById } from '../../services/AddFollowerById';
-// import { DeleteFollowerById } from '../../services/DeleteFollowerById';
+
 import {
   TweetContainer,
   Line,
@@ -12,28 +12,28 @@ import {
 } from './UserListItem.styled';
 
 export const UserListItem = ({
-  oneUser: { id, user, tweets, avatar },
-  followers,
-  isFollowing,
-  onAddFollower,
-  onDeleteFollower,
+  oneUser: { id, user, tweets, followers, avatar },
 }) => {
-  // const [changeFollower, setNewFollowers] = useState(followers);
-  // const [isFollowing, setIsFollowing] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [newFollowers, setNewFollowers] = useState(followers);
 
-  // const addFollower = tweetId => {
-  //   console.log(tweetId);
-  //   AddFollowerById(tweetId);
-  //   setNewFollowers(state => state + 1);
-  //   setIsFollowing(true);
-  // };
+  const addFollower = followerId => {
+    GetTweetById(followerId).then(resp => {
+      console.log(resp.followers);
 
-  // const DeleteFollower = tweetId => {
-  //   console.log(tweetId);
-  //   DeleteFollowerById(tweetId);
-  //   setNewFollowers(state => state - 1);
-  //   setIsFollowing(false);
-  // };
+      setNewFollowers(prevState => prevState + 1);
+      setIsFollowing(true);
+    });
+  };
+
+  const deleteFollower = followerId => {
+    GetTweetById(followerId).then(resp => {
+      console.log(resp.followers);
+
+      setNewFollowers(prevState => prevState - 1);
+      setIsFollowing(false);
+    });
+  };
 
   return (
     <>
@@ -44,13 +44,13 @@ export const UserListItem = ({
         <ImgUser src={avatar} alt="avatar" />
         <p>{user}</p>
         <TweetsNumber>{tweets} tweets</TweetsNumber>
-        <p>{followers} followers</p>
+        <p>{newFollowers} followers</p>
         {isFollowing ? (
-          <Btn type="button" onClick={() => onDeleteFollower(id)}>
+          <Btn type="button" onClick={() => addFollower(id)}>
             following
           </Btn>
         ) : (
-          <Btn type="button" onClick={() => onAddFollower(id)}>
+          <Btn type="button" onClick={() => deleteFollower(id)}>
             follow
           </Btn>
         )}

@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { GetTweets } from '../../services/GetTweets';
-import { AddFollowerById } from '../../services/AddFollowerById';
-import { DeleteFollowerById } from '../../services/DeleteFollowerById';
 import { UsersList } from '../usersList/UsersList';
 
 const getInitialUsers = () => {
@@ -12,7 +10,7 @@ const getInitialUsers = () => {
 
   if (savedUsers !== null) {
     const parsedUsers = JSON.parse(savedUsers);
-    console.log(parsedUsers);
+
     return parsedUsers;
   }
   return [];
@@ -22,8 +20,6 @@ export const Tweets = () => {
   const [users, setUsers] = useState(getInitialUsers);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [changeFollower, setNewFollowers] = useState(100500);
-  const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('users', JSON.stringify(users));
@@ -34,6 +30,7 @@ export const Tweets = () => {
 
     GetTweets()
       .then(response => {
+        console.log(response);
         setUsers(response);
       })
       .catch(error => {
@@ -41,20 +38,6 @@ export const Tweets = () => {
       })
       .finally(() => setLoading(false));
   }, []);
-
-  const addFollower = tweetId => {
-    console.log(tweetId);
-    AddFollowerById(tweetId);
-    setNewFollowers(state => state + 1);
-    setIsFollowing(true);
-  };
-
-  const deleteFollower = tweetId => {
-    console.log(tweetId);
-    DeleteFollowerById(tweetId);
-    setNewFollowers(state => state - 1);
-    setIsFollowing(false);
-  };
 
   return (
     <>
@@ -65,15 +48,7 @@ export const Tweets = () => {
         </div>
       )}
       {error && <p>{error}</p>}
-      {!error && !loading && (
-        <UsersList
-          users={users}
-          followers={changeFollower}
-          isFollowing={isFollowing}
-          onAddFollower={addFollower}
-          onDeleteFollower={deleteFollower}
-        />
-      )}
+      {!error && !loading && <UsersList users={users} />}
     </>
   );
 };
