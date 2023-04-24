@@ -1,8 +1,9 @@
 import { UserListItem } from '../userListItem/UserListItem';
+import { List } from './UserList.styled';
 
 export const UsersList = ({ users }) => {
   return (
-    <ul>
+    <List>
       {users.map(user => {
         return (
           <li key={user.id}>
@@ -10,6 +11,6 @@ export const UsersList = ({ users }) => {
           </li>
         );
       })}
-    </ul>
+    </List>
   );
 };

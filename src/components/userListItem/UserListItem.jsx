@@ -5,52 +5,65 @@ import picture from '../../images/picture.png';
 
 import {
   TweetContainer,
+  WrapImg,
+  ImgLogo,
+  Img,
   Line,
   ImgUser,
+  NameUser,
   TweetsNumber,
+  FollowersNumber,
   Btn,
+  BtnFollowing,
 } from './UserListItem.styled';
 
 export const UserListItem = ({
   oneUser: { id, user, tweets, followers, avatar },
 }) => {
-  const [isFollowing, setIsFollowing] = useState(false);
   const [newFollowers, setNewFollowers] = useState(followers);
+  const [isFollowing, setIsFollowing] = useState(false);
 
-  const addFollower = followerId => {
-    GetTweetById(followerId).then(resp => {
-      console.log(resp.followers);
-
-      setNewFollowers(prevState => prevState + 1);
+  const useToggle = () => {
+    const following = tweetId => {
+      GetTweetById(tweetId).then(resp => {
+        console.log(resp.followers);
+        setNewFollowers(prevState => prevState + 1);
+      });
       setIsFollowing(true);
-    });
-  };
+    };
 
-  const deleteFollower = followerId => {
-    GetTweetById(followerId).then(resp => {
-      console.log(resp.followers);
-
-      setNewFollowers(prevState => prevState - 1);
+    const follow = tweetId => {
+      GetTweetById(tweetId).then(resp => {
+        console.log(resp.followers);
+        setNewFollowers(prevState => prevState - 1);
+      });
       setIsFollowing(false);
-    });
+    };
+    const toggle = () => setIsFollowing(isFollowing => !isFollowing);
+
+    return { isFollowing, following, follow, toggle };
   };
+
+  const { following, follow } = useToggle();
 
   return (
     <>
       <TweetContainer>
-        <img src={Logo} alt="logo" />
-        <img src={picture} alt="tweet" />
+        <WrapImg>
+          <ImgLogo src={Logo} alt="logo" />
+          <Img src={picture} alt="tweet" />
+        </WrapImg>
         <Line />
         <ImgUser src={avatar} alt="avatar" />
-        <p>{user}</p>
+        <NameUser>{user}</NameUser>
         <TweetsNumber>{tweets} tweets</TweetsNumber>
-        <p>{newFollowers} followers</p>
+        <FollowersNumber>{newFollowers} followers</FollowersNumber>
         {isFollowing ? (
-          <Btn type="button" onClick={() => addFollower(id)}>
+          <BtnFollowing type="button" onClick={() => follow(id)}>
             following
-          </Btn>
+          </BtnFollowing>
         ) : (
-          <Btn type="button" onClick={() => deleteFollower(id)}>
+          <Btn type="button" onClick={() => following(id)}>
             follow
           </Btn>
         )}
