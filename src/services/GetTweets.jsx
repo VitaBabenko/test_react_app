@@ -6,7 +6,6 @@ export const GetTweets = async page => {
   url.searchParams.append('limit', 4);
 
   const response = await axios.get(url);
-  console.log(response);
 
   return response.data;
 };

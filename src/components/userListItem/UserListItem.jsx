@@ -17,37 +17,37 @@ import {
 } from './UserListItem.styled';
 
 export const UserListItem = ({
-  oneUser: { id, user, tweets, followers, avatar },
+  oneUser: { id, user, tweets, followers, avatar, following },
 }) => {
   const [newFollowers, setNewFollowers] = useState(followers);
-  const [isFollowing, setIsFollowing] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(following);
 
   const handleFollowing = tweetId => {
     GetTweetById(tweetId).then(resp => {
-      console.log(resp);
       setNewFollowers(prevState => prevState + 1);
+      setIsFollowing(true);
       const users = JSON.parse(localStorage.getItem('users'));
-      console.log(users);
       const index = users.findIndex(user => user.id === resp.id);
       const userFind = users.find(user => user.id === resp.id);
       userFind.followers = userFind.followers + 1;
-
-      console.log(userFind);
-      console.log(index);
+      userFind.following = true;
       users.splice(index, 1, userFind);
-      console.log(users);
       localStorage.setItem('users', JSON.stringify(users));
     });
-
-    setIsFollowing(true);
   };
 
   const handleFollow = tweetId => {
     GetTweetById(tweetId).then(resp => {
-      console.log(resp);
       setNewFollowers(prevState => prevState - 1);
+      setIsFollowing(false);
+      const users = JSON.parse(localStorage.getItem('users'));
+      const index = users.findIndex(user => user.id === resp.id);
+      const userFind = users.find(user => user.id === resp.id);
+      userFind.followers = userFind.followers - 1;
+      userFind.following = false;
+      users.splice(index, 1, userFind);
+      localStorage.setItem('users', JSON.stringify(users));
     });
-    setIsFollowing(false);
   };
 
   return (

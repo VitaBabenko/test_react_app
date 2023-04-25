@@ -30,10 +30,17 @@ export const Tweets = () => {
 
     GetTweets(page)
       .then(respUsers => {
-        console.log(respUsers);
+        // if (page === 1) {
+        //   if (localStorage.getItem('users') === []) {
+        //     return setUsers(respUsers);
+        //   }
+        //   return setUsers(JSON.parse(localStorage.getItem('users')));
+        // }
+        // return setUsers(prevUsers => [...prevUsers, ...respUsers]);
         return page === 1
-          ? setUsers(respUsers)
-          : setUsers(prevUsers => [...prevUsers, ...respUsers]);
+          ? setUsers(JSON.parse(localStorage.getItem('users')))
+          : // setUsers(respUsers)
+            setUsers(prevUsers => [...prevUsers, ...respUsers]);
       })
       .catch(error => {
         setError(error.message);
@@ -43,6 +50,7 @@ export const Tweets = () => {
 
   const handleButton = () => {
     setPage(prevPage => prevPage + 1);
+    setUsers(JSON.parse(localStorage.getItem('users')));
   };
 
   return (
