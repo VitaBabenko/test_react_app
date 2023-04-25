@@ -1,30 +1,29 @@
 import { useEffect, useState } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import { Loader } from '../Loader';
 import { GetTweets } from '../../services/GetTweets';
 import { UsersList } from '../usersList/UsersList';
-import { Link, WrapSkeleton, Btn } from './Tweets.styled';
+import { Link, Btn } from './Tweets.styled';
 
-// const getInitialUsers = () => {
-//   const savedUsers = localStorage.getItem('users');
+const getInitialUsers = () => {
+  const savedUsers = localStorage.getItem('users');
 
-//   if (savedUsers !== null) {
-//     const parsedUsers = JSON.parse(savedUsers);
+  if (savedUsers !== null) {
+    const parsedUsers = JSON.parse(savedUsers);
 
-//     return parsedUsers;
-//   }
-//   return [];
-// };
+    return parsedUsers;
+  }
+  return [];
+};
 
 export const Tweets = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(getInitialUsers);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
 
-  // useEffect(() => {
-  //   localStorage.setItem('users', JSON.stringify(users));
-  // }, [users]);
+  useEffect(() => {
+    localStorage.setItem('users', JSON.stringify(users));
+  }, [users]);
 
   useEffect(() => {
     setLoading(true);
@@ -49,11 +48,7 @@ export const Tweets = () => {
   return (
     <>
       <Link to="/">back</Link>
-      {loading && (
-        <WrapSkeleton>
-          <Skeleton count={12} height={460} />
-        </WrapSkeleton>
-      )}
+      {loading && <Loader />}
       {error && <p>{error}</p>}
       {!error && !loading && <UsersList users={users} />}
       {page < 3 && (

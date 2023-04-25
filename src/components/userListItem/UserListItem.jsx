@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { GetTweetById } from '../../services/GetTweetById';
 import Logo from '../../images/Logo.png';
 import picture from '../../images/picture.png';
-
 import {
   TweetContainer,
   WrapImg,
@@ -23,28 +22,33 @@ export const UserListItem = ({
   const [newFollowers, setNewFollowers] = useState(followers);
   const [isFollowing, setIsFollowing] = useState(false);
 
-  const useToggle = () => {
-    const following = tweetId => {
-      GetTweetById(tweetId).then(resp => {
-        console.log(resp.followers);
-        setNewFollowers(prevState => prevState + 1);
-      });
-      setIsFollowing(true);
-    };
+  const handleFollowing = tweetId => {
+    GetTweetById(tweetId).then(resp => {
+      console.log(resp);
+      setNewFollowers(prevState => prevState + 1);
+      const users = JSON.parse(localStorage.getItem('users'));
+      console.log(users);
+      const index = users.findIndex(user => user.id === resp.id);
+      const userFind = users.find(user => user.id === resp.id);
+      userFind.followers = userFind.followers + 1;
 
-    const follow = tweetId => {
-      GetTweetById(tweetId).then(resp => {
-        console.log(resp.followers);
-        setNewFollowers(prevState => prevState - 1);
-      });
-      setIsFollowing(false);
-    };
-    const toggle = () => setIsFollowing(isFollowing => !isFollowing);
+      console.log(userFind);
+      console.log(index);
+      users.splice(index, 1, userFind);
+      console.log(users);
+      localStorage.setItem('users', JSON.stringify(users));
+    });
 
-    return { isFollowing, following, follow, toggle };
+    setIsFollowing(true);
   };
 
-  const { following, follow } = useToggle();
+  const handleFollow = tweetId => {
+    GetTweetById(tweetId).then(resp => {
+      console.log(resp);
+      setNewFollowers(prevState => prevState - 1);
+    });
+    setIsFollowing(false);
+  };
 
   return (
     <>
@@ -59,11 +63,11 @@ export const UserListItem = ({
         <TweetsNumber>{tweets} tweets</TweetsNumber>
         <FollowersNumber>{newFollowers} followers</FollowersNumber>
         {isFollowing ? (
-          <BtnFollowing type="button" onClick={() => follow(id)}>
+          <BtnFollowing type="button" onClick={() => handleFollow(id)}>
             following
           </BtnFollowing>
         ) : (
-          <Btn type="button" onClick={() => following(id)}>
+          <Btn type="button" onClick={() => handleFollowing(id)}>
             follow
           </Btn>
         )}

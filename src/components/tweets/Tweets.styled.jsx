@@ -26,12 +26,6 @@ export const Link = styled(BackLink)`
   }
 `;
 
-export const WrapSkeleton = styled.div`
-  margin-top: 40px;
-  max-width: 300px;
-  border-radius: 40px;
-`;
-
 export const Btn = styled.button`
   display: block;
   margin-top: 30px;
@@ -50,5 +44,9 @@ export const Btn = styled.button`
   &:hover {
     transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     transform: scale(1.05);
+  }
+
+  @media (min-width: 1200px) {
+    margin-top: 50px;
   }
 `;

@@ -2,8 +2,10 @@ import styled from 'styled-components';
 
 export const TweetContainer = styled.div`
   position: relative;
-  max-width: 300px;
+  width: 290px;
   height: 460px;
+  margin-left: auto;
+  margin-right: auto;
   background: linear-gradient(
     114.99deg,
     #471ca9 -0.99%,
@@ -13,9 +15,8 @@ export const TweetContainer = styled.div`
   box-shadow: -2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23);
   border-radius: 20px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1200px) {
     width: 380px;
-    height: 460px;
   }
 `;
 
@@ -31,11 +32,23 @@ export const ImgLogo = styled.img`
   margin-left: 15px;
   width: 70px;
   height: 20px;
+
+  @media (min-width: 1200px) {
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 76px;
+    height: 22px;
+  }
 `;
 
 export const Img = styled.img`
   width: 250px;
   margin-left: 25px;
+
+  @media (min-width: 1200px) {
+    width: 280px;
+    margin-left: 36px;
+  }
 `;
 
 export const Line = styled.hr`
@@ -54,10 +67,16 @@ export const ImgUser = styled.img`
   height: 80px;
   border-radius: 50%;
   border: 8px solid #ebd8ff;
+
+  @media (min-width: 1200px) {
+    top: 178px;
+    left: 150px;
+  }
 `;
 
 export const NameUser = styled.p`
   margin-top: 60px;
+  margin-bottom: 0;
   text-align: center;
   font-weight: 500;
   font-size: 18px;
@@ -73,9 +92,15 @@ export const TweetsNumber = styled.p`
   font-size: 16px;
   text-transform: uppercase;
   color: #ebd8ff;
+
+  @media (min-width: 1200px) {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
 `;
 
 export const FollowersNumber = styled.p`
+  margin: 0;
   text-align: center;
   font-weight: 500;
   font-size: 16px;
@@ -97,6 +122,10 @@ export const Btn = styled.button`
   font-size: 18px;
   text-transform: uppercase;
   color: #373737;
+
+  @media (min-width: 1200px) {
+    margin-top: 20px;
+  }
 `;
 
 export const BtnFollowing = styled.button`
@@ -113,4 +142,8 @@ export const BtnFollowing = styled.button`
   font-size: 18px;
   text-transform: uppercase;
   color: #373737;
+
+  @media (min-width: 1200px) {
+    margin-top: 20px;
+  }
 `;
