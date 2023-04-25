@@ -30,17 +30,15 @@ export const Tweets = () => {
 
     GetTweets(page)
       .then(respUsers => {
-        // if (page === 1) {
-        //   if (localStorage.getItem('users') === []) {
-        //     return setUsers(respUsers);
-        //   }
-        //   return setUsers(JSON.parse(localStorage.getItem('users')));
-        // }
-        // return setUsers(prevUsers => [...prevUsers, ...respUsers]);
-        return page === 1
-          ? setUsers(JSON.parse(localStorage.getItem('users')))
-          : // setUsers(respUsers)
-            setUsers(prevUsers => [...prevUsers, ...respUsers]);
+        setUsers(JSON.parse(localStorage.getItem('users')));
+
+        if (page === 1) {
+          // if (localStorage.getItem('users') !== null) {
+          //   return setUsers(JSON.parse(localStorage.getItem('users')));
+          // }
+          return setUsers(respUsers);
+        }
+        setUsers(prevUsers => [...prevUsers, ...respUsers]);
       })
       .catch(error => {
         setError(error.message);
