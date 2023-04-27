@@ -40,6 +40,8 @@ export const Btn = styled.button`
   font-size: 18px;
   text-transform: uppercase;
   color: #373737;
+  border: none;
+  cursor: pointer;
 
   &:hover {
     transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);

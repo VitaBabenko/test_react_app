@@ -122,6 +122,13 @@ export const Btn = styled.button`
   font-size: 18px;
   text-transform: uppercase;
   color: #373737;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1.05);
+  }
 
   @media (min-width: 1200px) {
     margin-top: 20px;
@@ -142,6 +149,13 @@ export const BtnFollowing = styled.button`
   font-size: 18px;
   text-transform: uppercase;
   color: #373737;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1.05);
+  }
 
   @media (min-width: 1200px) {
     margin-top: 20px;
