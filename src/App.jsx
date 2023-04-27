@@ -1,10 +1,10 @@
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { GlobalStyle } from './GlobalStyle';
-import { Layout } from './layout/Layout';
+import { GlobalStyle } from './components/GlobalStyle';
+import { Layout } from './components/layout/Layout';
 
-const HomePage = lazy(() => import('../pages/HomePage'));
-const TweetsPage = lazy(() => import('../pages/TweetsPage'));
+const HomePage = lazy(() => import('./pages/HomePage'));
+const TweetsPage = lazy(() => import('./pages/TweetsPage'));
 
 export const App = () => {
   return (
