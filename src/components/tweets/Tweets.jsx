@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Dropdown } from '../dropdown/Dropdown';
 import { Loader } from '../Loader';
 import { GetTweets } from '../../services/GetTweets';
 import { UsersList } from '../usersList/UsersList';
-import { Link, Btn } from './Tweets.styled';
+import { Wrap, Link, Btn } from './Tweets.styled';
 
 const getInitialUsers = () => {
   const savedUsers = localStorage.getItem('users');
@@ -48,7 +49,10 @@ export const Tweets = () => {
 
   return (
     <>
-      <Link to="/">back</Link>
+      <Wrap>
+        <Link to="/">back</Link>
+        <Dropdown />
+      </Wrap>
       {loading && <Loader />}
       {error && <p>{error}</p>}
       {!error && !loading && <UsersList users={users} />}

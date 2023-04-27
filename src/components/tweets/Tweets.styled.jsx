@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { Link as BackLink } from 'react-router-dom';
 
+export const Wrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const Link = styled(BackLink)`
   text-align: center;
   width: 100px;
