@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunktweets_react=self.webpackChunktweets_react||[]).push([[97],{97:function(e,n,t){t.r(n),t.d(n,{default:function(){return o}});var r,c=t(168),u=t(562).ZP.h1(r||(r=(0,c.Z)(["\n  color: #471ca9;\n  text-transform: uppercase;\n  text-align: center;\n  margin-top: 50px;\n"]))),a=t(184),s=function(){return(0,a.jsx)(u,{children:"Hello!"})},o=function(){return(0,a.jsx)(s,{})}}}]);
+//# sourceMappingURL=97.ab4bbe4e.chunk.js.map
