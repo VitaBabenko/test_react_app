@@ -18,6 +18,7 @@ const getInitialUsers = () => {
 
 export const Tweets = () => {
   const [users, setUsers] = useState(getInitialUsers);
+  const [filterUsers, setFilterUsers] = useState('all');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
@@ -47,15 +48,29 @@ export const Tweets = () => {
     setUsers(JSON.parse(localStorage.getItem('users')));
   };
 
+  const filterListUsers = users.filter(user => {
+    if (filterUsers === 'follow') {
+      return user.following === false;
+    } else if (filterUsers === 'followings') {
+      return user.following === true;
+    } else {
+      return user;
+    }
+  });
+
+  const onFilterValueSelected = filterValue => {
+    setFilterUsers(filterValue);
+  };
+
   return (
     <>
       <Wrap>
         <Link to="/">back</Link>
-        <Dropdown />
+        <Dropdown filterValueSelected={onFilterValueSelected} />
       </Wrap>
       {loading && <Loader />}
       {error && <p>{error}</p>}
-      {!error && !loading && <UsersList users={users} />}
+      {!error && !loading && <UsersList users={filterListUsers} />}
       {page < 3 && (
         <Btn type="button" onClick={handleButton}>
           Load More

@@ -1,13 +1,17 @@
 import { Wrap, BtnSelect } from './Dropdown.styled';
 
-export const Dropdown = () => {
+export const Dropdown = ({ filterValueSelected }) => {
+  const onFilterValueChanged = evt => {
+    const value = evt.target.value;
+    filterValueSelected(value);
+  };
+
   return (
     <Wrap>
-      <label>Select a filter</label>
-      <BtnSelect name="filter" id="filter">
-        <option value="all">all</option>
-        <option value="follow">follow</option>
-        <option value="followings">followings</option>
+      <BtnSelect name="filter" onChange={onFilterValueChanged}>
+        <option value="all">All</option>
+        <option value="follow">Follow</option>
+        <option value="followings">Followings</option>
       </BtnSelect>
     </Wrap>
   );

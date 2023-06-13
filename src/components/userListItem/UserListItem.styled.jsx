@@ -27,32 +27,20 @@ export const WrapImg = styled.div`
   margin-right: auto;
 `;
 
-export const ImgLogo = styled.img`
-  margin-top: 15px;
-  margin-left: 15px;
-  width: 70px;
-  height: 20px;
-
-  @media (min-width: 1200px) {
-    margin-top: 20px;
-    margin-left: 20px;
-    width: 76px;
-    height: 22px;
-  }
-`;
-
 export const Img = styled.img`
   width: 250px;
   margin-left: 25px;
+  margin-top: 25px;
 
   @media (min-width: 1200px) {
     width: 280px;
     margin-left: 36px;
+    margin-top: 35px;
   }
 `;
 
 export const Line = styled.hr`
-  margin-top: 18px;
+  margin-top: 27px;
   height: 8px;
   background: #ebd8ff;
   box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.06),

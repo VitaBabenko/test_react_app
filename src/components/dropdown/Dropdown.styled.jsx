@@ -5,22 +5,19 @@ export const Wrap = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  width: 100px;
+
+  @media (min-width: 768px) {
+    width: 140px;
+  }
 `;
 
 export const BtnSelect = styled.select`
-  width: 110px;
-  border: 2px solid #5cd3a8;
+  width: 100%;
   border-radius: 8px;
+  padding: 3px 7px;
 
-  &:hover {
-    background-color: #5cd3a8;
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  @media (min-width: 1200px) {
+  @media (min-width: 768px) {
     padding: 4px 8px;
   }
 `;
